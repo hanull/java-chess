@@ -53,7 +53,7 @@ class MoveCheckerTest {
 
     @ParameterizedTest(name = "{3}")
     @MethodSource("provideKnightPosition")
-    @DisplayName("대각선으로 이동하는지 확인한다.")
+    @DisplayName("나이트의 이동인지 확인한다.")
     void checkKnight(final Position current, final Position destination, final boolean expected,
             final String direction) {
         final boolean actual = MoveChecker.isForKnight(current, destination);
