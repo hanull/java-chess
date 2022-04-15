@@ -1,7 +1,6 @@
 package chess.domain;
 
 import chess.controller.Command;
-import chess.domain.piece.Piece;
 import chess.domain.player.Player;
 import chess.domain.player.Result;
 import chess.domain.player.Score;
@@ -43,24 +42,23 @@ public class ChessGame {
         return whitePlayer.hasKing() && blackPlayer.hasKing();
     }
 
-    public List<Piece> move(final Player currentPlayer, final Player opponentPlayer,
+    public void move(final Player currentPlayer, final Player opponentPlayer,
             final Position currentPosition, final Position destinationPosition) {
         validateMovable(currentPlayer, currentPosition, destinationPosition);
         final boolean hasPieceOfOpponentPlayer = opponentPlayer.hasPiece(destinationPosition);
         if (hasPieceOfOpponentPlayer) {
-            return capture(currentPlayer, opponentPlayer, currentPosition, destinationPosition);
+            capture(currentPlayer, opponentPlayer, currentPosition, destinationPosition);
+            return;
         }
         currentPlayer.move(currentPosition, destinationPosition);
         turn = turn.next();
-        return currentPlayer.findAll();
     }
 
-    private List<Piece> capture(final Player currentPlayer, final Player opponentPlayer, final Position currentPosition,
+    private void capture(final Player currentPlayer, final Player opponentPlayer, final Position currentPosition,
             Position destinationPosition) {
         currentPlayer.capture(currentPosition, destinationPosition);
         opponentPlayer.remove(destinationPosition);
         turn = turn.next();
-        return currentPlayer.findAll();
     }
 
     private void validateMovable(final Player currentPlayer, final Position currentPosition,

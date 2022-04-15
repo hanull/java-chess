@@ -67,7 +67,8 @@ class ChessGameTest {
         final Position currentPosition = new Position(1, 'a');
         final Position destinationPosition = new Position(7, 'a');
 
-        final List<Piece> actual = chessGame.move(currentPlayer, opponentPlayer, currentPosition, destinationPosition);
+        chessGame.move(currentPlayer, opponentPlayer, currentPosition, destinationPosition);
+        final List<Piece> actual = currentPlayer.findAll();
 
         assertThat(actual).contains(new Rook(destinationPosition));
     }
@@ -78,7 +79,8 @@ class ChessGameTest {
         final Position currentPosition = new Position(1, 'a');
         final Position destinationPosition = new Position(5, 'a');
 
-        final List<Piece> actual = chessGame.move(currentPlayer, opponentPlayer, currentPosition, destinationPosition);
+        chessGame.move(currentPlayer, opponentPlayer, currentPosition, destinationPosition);
+        final List<Piece> actual = currentPlayer.findAll();
 
         assertThat(actual).contains(new Rook(destinationPosition));
     }
