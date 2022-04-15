@@ -1,15 +1,15 @@
 package chess.domain.player;
 
+import chess.domain.generator.Generator;
 import chess.domain.piece.Bishop;
 import chess.domain.piece.King;
 import chess.domain.piece.Knight;
 import chess.domain.piece.Pawn;
+import chess.domain.piece.Piece;
 import chess.domain.piece.Queen;
 import chess.domain.piece.Rook;
 import chess.domain.piece.State;
 import chess.domain.position.Position;
-import chess.domain.generator.Generator;
-import chess.domain.piece.Piece;
 import chess.dto.PieceDto;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -74,14 +74,14 @@ public class Player {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public Position move(final Position current, final Position destination) {
-        return findPiece(current)
-                .move(current, destination, team);
+    public void move(final Position current, final Position destination) {
+        final Piece piece = findPiece(current);
+        piece.move(current, destination, team);
     }
 
-    public Position capture(final Position current, final Position destination) {
-        return findPiece(current)
-                .capture(current, destination, team);
+    public void capture(final Position current, final Position destination) {
+        final Piece piece = findPiece(current);
+        piece.capture(current, destination, team);
     }
 
     public void remove(final Position position) {
